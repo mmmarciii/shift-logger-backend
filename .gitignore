@@ -60,10 +60,17 @@ dlldata.c
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
 # .NET
 project.lock.json
 project.fragment.lock.json
 artifacts/
+bin/
+obj/
 
 # Tye
 .tye/
