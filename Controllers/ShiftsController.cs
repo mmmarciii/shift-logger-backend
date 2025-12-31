@@ -35,12 +35,12 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Shift>> PostShift(Shift shift)
+        public async Task<ActionResult<IEnumerable<Shift>>> PostShift(List<Shift> shifts)
         {
-            _context.Shifts.Add(shift);
+            _context.Shifts.AddRange(shifts);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetShifts), new { id = shift.Id }, shift);
+            return Ok(shifts);
         }
 
         [HttpDelete("{id}")]
