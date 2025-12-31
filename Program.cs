@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngular",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200", "https://shiftslogger.netlify.app/")
+            policy.WithOrigins("http://localhost:4200", "https://shiftslogger.netlify.app")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -32,7 +32,7 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAngular");
 app.MapControllers();
 
-
+// Database checking
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -44,7 +44,7 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Hiba történt az adatbázis létrehozásakor.");
+        logger.LogError(ex, "An error occurred while creating the database.");
     }
 }
 
