@@ -29,7 +29,7 @@ var app = builder.Build();
 app.MapOpenApi();
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+app.UseCors("AllowAngular");
 app.MapControllers();
 
 
