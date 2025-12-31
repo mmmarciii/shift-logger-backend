@@ -29,4 +29,20 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.MapControllers();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ShiftsContext>();
+        context.Database.EnsureCreated();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Hiba történt az adatbázis létrehozásakor.");
+    }
+}
+
 app.Run();
